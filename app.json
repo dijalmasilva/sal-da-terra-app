@@ -1,5 +1,6 @@
 {
   "expo": {
+    "primaryColor": "#193D5A",
     "name": "sal-da-terra-app",
     "slug": "sal-da-terra-app",
     "version": "1.0.0",
@@ -21,10 +22,22 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.prdijalma.saldaterraapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e9e3c336-4b51-4024-a96a-adfc698d6f6f"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e9e3c336-4b51-4024-a96a-adfc698d6f6f"
     }
   }
 }
