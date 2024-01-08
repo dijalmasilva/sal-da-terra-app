@@ -7,6 +7,10 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "sal-da-terra-app",
+    "experiments": {
+      "tsconfigPaths": true,
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -38,6 +42,9 @@
     },
     "updates": {
       "url": "https://u.expo.dev/e9e3c336-4b51-4024-a96a-adfc698d6f6f"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
