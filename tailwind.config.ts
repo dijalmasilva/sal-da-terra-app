@@ -12,6 +12,7 @@ module.exports = {
         salt: {
           blue: '#183D5A',
           gold: '#BF9461',
+          white: '#F2F2F2'
         }
       }
     },
