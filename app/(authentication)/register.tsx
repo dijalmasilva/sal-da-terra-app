@@ -1,8 +1,10 @@
-import {Text, View} from "react-native";
+import {Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import Input from "@/components/input/Input";
 import {useFormik} from "formik";
-import Button from "@/components/button/Button";
 import * as Yup from 'yup';
+import {ArrowLeftIcon} from "lucide-react-native";
+import {router} from "expo-router";
+import PrimaryButton from "@/components/button/PrimaryButton";
 
 type RegisterForm = {
   fullName: string
@@ -53,70 +55,85 @@ const RegisterPage = () => {
     handleChange('phone')(result);
   }
 
-  return (
-    <View className="w-full items-center">
-      <Text className="text-2xl font-bold mt-4 text-salt-blue">Faça seu cadastro</Text>
-      <View className="mt-8 w-full max-w-xs items-start">
-        <Input
-          placeholder={"Nome"}
-          label="Nome completo"
-          value={values.fullName}
-          error={errors.fullName}
-          onChangeText={handleChange('fullName')}
-          onBlur={handleBlur('fullName')}
-          touched={touched.fullName}
-          autoComplete="name"
-          autoCapitalize="words"
-          keyboardType="default"
-          returnKeyType="next"
-          returnKeyLabel="Próximo"
-        />
-        <Input
-          placeholder={"(99) 99999999"}
-          label="Número do celular"
-          value={values.phone}
-          error={errors.phone}
-          onChangeText={onChangePhone}
-          onBlur={handleBlur('phone')}
-          touched={touched.phone}
-          keyboardType="number-pad"
-          returnKeyType="next"
-          returnKeyLabel="Próximo"
-          autoComplete="tel-device"
-        />
-        <Input
-          placeholder={"example@mail.com"}
-          label="E-mail"
-          value={values.email}
-          error={errors.email}
-          onChangeText={handleChange('email')}
-          onBlur={handleBlur('email')}
-          touched={touched.email}
-          autoCapitalize="none"
-          autoComplete="email"
-          keyboardType="email-address"
-          returnKeyType="next"
-          returnKeyLabel="Próximo"
+  const back = () => {
+    router.back();
+  }
 
-        />
-        <Input
-          placeholder={"*********"}
-          label="Senha"
-          secureTextEntry
-          value={values.password}
-          error={errors.password}
-          onChangeText={handleChange('password')}
-          onBlur={handleBlur('password')}
-          touched={touched.password}
-          autoComplete="password"
-          autoCapitalize="none"
-          keyboardAppearance="dark"
-          returnKeyType="go"
-          returnKeyLabel="go"
-        />
-        <Button className="bg-salt-blue text-salt-white" text="Cadastrar" onPress={handleSubmit} />
+  return (
+    <ScrollView style={{ flex: 1 }} className="p-8 bg-salt-white">
+      <View className="w-full items-center">
+        <View className="w-full items-start">
+          <TouchableOpacity onPress={back}>
+            <ArrowLeftIcon className="text-salt-blue font-bold" size={28} />
+          </TouchableOpacity>
+        </View>
+        <View className="w-[200px] h-[133px] relative">
+          <Image source={require('@/assets/logos/blue/saldaterra.png')}
+                 style={{objectFit: 'contain', position: 'absolute', width: '100%', height: '100%'}}/>
+        </View>
+        <Text className="text-2xl font-bold mt-4 text-salt-blue">Faça seu cadastro</Text>
+        <View className="mt-8 w-full max-w-xs items-start">
+          <Input
+            placeholder={"Nome"}
+            label="Nome completo"
+            value={values.fullName}
+            error={errors.fullName}
+            onChangeText={handleChange('fullName')}
+            onBlur={handleBlur('fullName')}
+            touched={touched.fullName}
+            autoComplete="name"
+            autoCapitalize="words"
+            keyboardType="default"
+            returnKeyType="next"
+            returnKeyLabel="Próximo"
+          />
+          <Input
+            placeholder={"(99) 99999999"}
+            label="Número do celular"
+            value={values.phone}
+            error={errors.phone}
+            onChangeText={onChangePhone}
+            onBlur={handleBlur('phone')}
+            touched={touched.phone}
+            keyboardType="number-pad"
+            returnKeyType="next"
+            returnKeyLabel="Próximo"
+            autoComplete="tel-device"
+          />
+          <Input
+            placeholder={"example@mail.com"}
+            label="E-mail"
+            value={values.email}
+            error={errors.email}
+            onChangeText={handleChange('email')}
+            onBlur={handleBlur('email')}
+            touched={touched.email}
+            autoCapitalize="none"
+            autoComplete="email"
+            keyboardType="email-address"
+            returnKeyType="next"
+            returnKeyLabel="Próximo"
+
+          />
+          <Input
+            placeholder={"*********"}
+            label="Senha"
+            secureTextEntry
+            value={values.password}
+            error={errors.password}
+            onChangeText={handleChange('password')}
+            onBlur={handleBlur('password')}
+            touched={touched.password}
+            autoComplete="password"
+            autoCapitalize="none"
+            keyboardAppearance="dark"
+            returnKeyType="go"
+            returnKeyLabel="go"
+          />
+          <PrimaryButton text="Cadastrar" onPress={handleSubmit} />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 

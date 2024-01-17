@@ -25,10 +25,10 @@ const IndexPage = () => {
         <Text className="text-salt-gold text-xl font-bold mt-4">saborizando o mundo</Text>
       </View>
       <View className="items-center mt-16 w-full max-w-xs">
-        <Button text="Entre" onPress={createAccount} />
-        <Button text="Crie sua conta" onPress={login} />
+        <Button text="Entre" onPress={login} />
+        <Button text="Crie sua conta" onPress={createAccount} />
       </View>
-      <StatusBar style="inverted" />
+      <StatusBar backgroundColor="#183D5A" style="inverted" />
     </View>
   );
 }
