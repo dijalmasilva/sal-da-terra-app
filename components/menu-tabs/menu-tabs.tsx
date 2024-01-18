@@ -8,15 +8,15 @@ const MenuTabs = () => {
   }
 
   return (
-    <View className="px-4 mb-4 bg-none">
-      <View className="bg-white rounded-3xl px-4 py-2 flex-row justify-evenly shadow-2xl mt-1" style={{ gap: 24 }}>
+    <View className="px-2 mb-2 bg-none">
+      <View className="bg-white rounded-xl px-4 py-2 flex-row justify-evenly shadow-2xl mt-1" style={{ gap: 24 }}>
         <TouchableOpacity className="items-center" onPress={() => onClick('/logged/home')}>
           <LucideHome className="text-salt-blue" />
           <Text className="font-bold">Início</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="items-center" onPress={() => onClick('/logged/cult')}>
+        <TouchableOpacity className="items-center" onPress={() => onClick('/logged/calendar')}>
           <LucideCalendar className="text-salt-blue" />
-          <Text className="font-bold">Cultos</Text>
+          <Text className="font-bold">Agenda</Text>
         </TouchableOpacity>
         <TouchableOpacity className="items-center" onPress={() => onClick('/logged/contributed')}>
           <LucideHeart className="text-salt-blue" />
