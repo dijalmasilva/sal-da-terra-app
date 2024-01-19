@@ -4,9 +4,10 @@ import {router} from "expo-router";
 
 type Props = {
   transparency?: boolean
+  hiddenIcons?: boolean
 }
 
-const Header = ({transparency = false}: Props) => {
+const Header = ({transparency = false, hiddenIcons = false}: Props) => {
 
   const goToProfile = () => {
     router.push('/logged/profile')
@@ -28,9 +29,15 @@ const Header = ({transparency = false}: Props) => {
           </View>
         )
       }
-      <View className="flex-row gap-2 items-center justify-end flex-1">
-        <LucideBell className="text-white" size={20}/>
-        <LucideSearch className="text-white" size={20}/>
+      <View className="flex-row items-center justify-end flex-1" style={{ gap: 12 }}>
+        {
+          !hiddenIcons && (
+            <>
+              <LucideBell className="text-white" size={20}/>
+              <LucideSearch className="text-white" size={20}/>
+            </>
+          )
+        }
         <TouchableOpacity onPress={goToProfile} className="w-[32px] h-[32px] relative rounded-full items-center justify-center bg-white">
           <Image source={require('@/assets/images/prdijalma.jpeg')}
                  style={{objectFit: 'contain', position: 'absolute', width: '100%', height: '100%'}}
