@@ -17,8 +17,8 @@ const Calendar = () => {
           </View>
         </View>
       </SectionBackground>
-      <ScrollView className="p-6">
-        <View className="flex-col mb-8" style={{ gap: 24 }}>
+      <ScrollView className="p-6 z-[-1]">
+        <View className="flex-col mb-8" style={{ gap: 24, zIndex: -1 }}>
           <Card padding={0}>
             <View className="flex-row" style={{gap: 16}}>
               <View className="w-[140px] h-[100px] relative ml-[-30px]">

@@ -18,7 +18,7 @@ const Contributed = () => {
           </View>
         </View>
       </SectionBackground>
-      <ScrollView className="p-6">
+      <ScrollView className="p-6 z-[-1]">
         <View className="flex-col mb-8" style={{ gap: 24 }}>
           <Card padding={0}>
             <View className="flex-row" style={{gap: 16}}>

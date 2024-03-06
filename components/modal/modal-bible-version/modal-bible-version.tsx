@@ -20,7 +20,6 @@ const ModalBibleVersion = ({visible, setVisible, onSelect, actualVersion}: Props
       transparent={true}
       visible={visible}
       onRequestClose={() => {
-        Alert.alert('Modal has been closed.');
         setVisible(!visible);
       }}>
       <View className="w-screen h-screen justify-center items-center p-8 bg-salt-blue">

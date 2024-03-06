@@ -22,7 +22,7 @@ const Profile = () => {
           </View>
         </View>
       </SectionBackground>
-      <ScrollView className="p-6">
+      <ScrollView className="p-6 z-[-1]">
         <Text className="text-xl font-bold">Atualizações</Text>
         <View className="mt-3 mb-9" style={{ gap: 24 }}>
           <Card>

@@ -4,7 +4,7 @@ import MenuTabs from "@/components/menu-tabs/menu-tabs";
 import {LucideVolume2, LucideZoomIn, LucideZoomOut} from "lucide-react-native";
 import BibleUtils, {VersionsType} from "@/utils/bible";
 import {useState} from "react";
-import ModalBibleVersion from "@/components/modal-bible-version/modal-bible-version";
+import ModalBibleVersion from "@/components/modal/modal-bible-version/modal-bible-version";
 
 const sizes = ['text-md', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl']
 

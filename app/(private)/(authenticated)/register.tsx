@@ -5,25 +5,26 @@ import * as Yup from 'yup';
 import {ArrowLeftIcon} from "lucide-react-native";
 import {router} from "expo-router";
 import PrimaryButton from "@/components/button/PrimaryButton";
+import ModalDateInput from "@/components/modal/modal-date-input/modal-date-input";
+import dayjs, {Dayjs} from "dayjs";
+import httpClient from "@/lib/http-client";
+import {useSession} from "@/hooks/auth/auth-context";
 
 type RegisterForm = {
-  fullName: string
-  email: string,
-  password: string,
+  name: string
   phone: string,
+  birthdate?: Date | null
 }
 
 const RegisterPage = () => {
+  const { signOut, signIn, token } = useSession()
+
   const registerSchema = Yup.object().shape({
-    email: Yup.string().email('E-mail inválido.').required('E-mail é obrigatório'),
-    fullName: Yup.string().required('Nome completo é obrigatório'),
+    name: Yup.string().required('Nome completo é obrigatório'),
     phone: Yup.string().required('Telefone é obrigatório')
       // regex that match with this (99) 99999-9999
       .matches(/^\(\d{2}\)\s\d{5}-\d{4}$/, 'Telefone inválido'),
-    password: Yup.string()
-      .required('Senha é obrigatório')
-      .min(6, 'No mínimo 6 caracteres')
-      .max(18, 'No máximo 18 caracteres')
+    birthdate: Yup.date().required('Data de nascimento é obrigatório'),
   })
 
   const {
@@ -36,13 +37,21 @@ const RegisterPage = () => {
   } = useFormik<RegisterForm>({
     validationSchema: registerSchema,
     initialValues: {
-      fullName: '',
-      email: '',
+      name: '',
       phone: '',
-      password: ''
+      birthdate: null,
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+      const resultValues = {
+        ...values,
+        birthdate: dayjs(values.birthdate).toDate(),
+      }
+      httpClient.auth(`Bearer ${token}`).post(resultValues, `/user/profile/complete`).json(async response => {
+        await signIn(response.token)
+        router.push('/home')
+      }).catch(err => {
+        alert(`Erro ao cadastrar: ${err}`)
+      })
     }
   })
 
@@ -55,12 +64,17 @@ const RegisterPage = () => {
     handleChange('phone')(result);
   }
 
-  const back = () => {
-    router.back();
+  const onChangeBirthDate = (date: Dayjs) => {
+    handleChange('birthdate')(date.format('YYYY-MM-DD'));
+  }
+
+  const back = async () => {
+    await signOut();
+    router.push('/')
   }
 
   return (
-    <ScrollView style={{ flex: 1 }} className="p-8 bg-salt-white">
+    <ScrollView style={{flex: 1}} className="p-8 pt-20 bg-salt-white">
       <View className="w-full items-center">
         <View className="w-full items-start">
           <TouchableOpacity onPress={back}>
@@ -76,11 +90,11 @@ const RegisterPage = () => {
           <Input
             placeholder={"Nome"}
             label="Nome completo"
-            value={values.fullName}
-            error={errors.fullName}
-            onChangeText={handleChange('fullName')}
-            onBlur={handleBlur('fullName')}
-            touched={touched.fullName}
+            value={values.name}
+            error={errors.name}
+            onChangeText={handleChange('name')}
+            onBlur={handleBlur('name')}
+            touched={touched.name}
             autoComplete="name"
             autoCapitalize="words"
             keyboardType="default"
@@ -100,37 +114,13 @@ const RegisterPage = () => {
             returnKeyLabel="Próximo"
             autoComplete="tel-device"
           />
-          <Input
-            placeholder={"example@mail.com"}
-            label="E-mail"
-            value={values.email}
-            error={errors.email}
-            onChangeText={handleChange('email')}
-            onBlur={handleBlur('email')}
-            touched={touched.email}
-            autoCapitalize="none"
-            autoComplete="email"
-            keyboardType="email-address"
-            returnKeyType="next"
-            returnKeyLabel="Próximo"
-
+          <ModalDateInput
+            onChange={onChangeBirthDate}
+            error={errors.birthdate}
+            minDate={dayjs().subtract(120, 'year')}
+            maxDate={dayjs()}
           />
-          <Input
-            placeholder={"*********"}
-            label="Senha"
-            secureTextEntry
-            value={values.password}
-            error={errors.password}
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            touched={touched.password}
-            autoComplete="password"
-            autoCapitalize="none"
-            keyboardAppearance="dark"
-            returnKeyType="go"
-            returnKeyLabel="go"
-          />
-          <PrimaryButton text="Cadastrar" onPress={handleSubmit} />
+          <PrimaryButton text="Cadastrar" onPress={handleSubmit}/>
         </View>
       </View>
     </ScrollView>

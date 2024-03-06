@@ -6,12 +6,8 @@ import {useRouter} from "expo-router";
 const IndexPage = () => {
   const router = useRouter();
 
-  const createAccount = () => {
-    router.push('register');
-  }
-
   const login = () => {
-    router.push('login');
+    router.push('/login');
   }
 
   return (
@@ -25,8 +21,7 @@ const IndexPage = () => {
         <Text className="text-salt-gold text-xl font-bold mt-4">saborizando o mundo</Text>
       </View>
       <View className="items-center mt-16 w-full max-w-xs">
-        <Button text="Entre" onPress={login} />
-        <Button text="Crie sua conta" onPress={createAccount} />
+        <Button text="Entrar" onPress={login} />
       </View>
       <StatusBar backgroundColor="#183D5A" style="inverted" />
     </View>

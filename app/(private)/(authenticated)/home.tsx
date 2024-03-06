@@ -7,7 +7,7 @@ import MenuTabs from "@/components/menu-tabs/menu-tabs";
 const HomeLogged = () => {
   return (
     <>
-      <View style={{flex: 1}} className="bg-salt-white">
+      <View style={{flex: 1}} className="bg-salt-white pt-6">
         <Header/>
         <ScrollView>
           <View className="p-6">
